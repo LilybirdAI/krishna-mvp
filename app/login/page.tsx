@@ -76,8 +76,23 @@ export default function LoginPage() {
           className="w-full rounded-xl bg-black px-4 py-3 text-white disabled:opacity-50"
         >
           {loading ? "Logging in..." : "Log In"}
-        </button>
-      </form>
-    </main>
-  );
+</button>
+ <button
+  type="submit"
+  disabled={loading}
+  className="w-full rounded-xl bg-black px-4 py-3 text-white disabled:opacity-50"
+>
+  {loading ? "Logging in..." : "Log In"}
+</button>
+
+<p className="mt-4 text-center text-sm text-gray-600">
+  Need an account?{" "}
+  <a href="/signup" className="font-medium text-black underline">
+    Sign up
+  </a>
+</p>
+
+</form>
+</main>
+);
 }

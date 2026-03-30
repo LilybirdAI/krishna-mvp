@@ -105,16 +105,39 @@ export default function MessagesPage() {
   };
 
   useEffect(() => {
-    if (!userId || !selectedUser) return;
+  if (!userId || !selectedUser) return;
 
-    loadConversation();
+  loadConversation();
 
-    const interval = setInterval(() => {
-      loadConversation();
-    }, 2000);
+  const channel = supabase
+    .channel("messages-channel")
+    .on(
+      "postgres_changes",
+      {
+        event: "INSERT",
+        schema: "public",
+        table: "messages",
+      },
+      (payload) => {
+        const newMsg = payload.new as Message;
 
-    return () => clearInterval(interval);
-  }, [userId, selectedUser]);
+        // Only update if it belongs to this conversation
+        if (
+          (newMsg.sender_id === userId &&
+            newMsg.recipient_id === selectedUser) ||
+          (newMsg.sender_id === selectedUser &&
+            newMsg.recipient_id === userId)
+        ) {
+          setMessages((prev) => [...prev, newMsg]);
+        }
+      }
+    )
+    .subscribe();
+
+  return () => {
+    supabase.removeChannel(channel);
+  };
+}, [userId, selectedUser]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });

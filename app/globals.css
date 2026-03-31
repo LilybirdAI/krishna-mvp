@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+<<<<<<< HEAD
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -24,3 +25,17 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+=======
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #f9fafb;
+  color: #111827;
+  min-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+>>>>>>> 359357df26ad7ceb327e78bab2bb9762f9084e97

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Image from "next/image";
 
 export default function Home() {
@@ -63,3 +64,12 @@ export default function Home() {
     </div>
   );
 }
+=======
+import { redirect } from "next/navigation";
+
+export const dynamic = "force-dynamic";
+
+export default function HomePage() {
+  redirect("/dashboard");
+}
+>>>>>>> 359357df26ad7ceb327e78bab2bb9762f9084e97
